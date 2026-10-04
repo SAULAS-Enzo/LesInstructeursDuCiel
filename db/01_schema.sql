@@ -20,7 +20,7 @@ CREATE TABLE PERSONNE (
 );
 
 CREATE TABLE FORMATION(
-    nomF VARCHAR(10) PRIMARY KEY CHECK(nomF IN ('BIA', 'AMB', 'LAPL', 'PPL', 'CPl', 'ATPL', 'MPL', 'CAEA', 'IR', 'QT', 'MCC')),
+    nomF VARCHAR(10) PRIMARY KEY CHECK(nomF IN ('BIA', 'ABL', 'LAPL', 'PPL', 'CPL', 'ATPL', 'MPL', 'CAEA', 'IR', 'QT', 'MCC')),
     descriptionF VARCHAR(1000),
     formationNecessaire VARCHAR(10),
     constraint fk_formation FOREIGN KEY (formationNecessaire) REFERENCES FORMATION(nomF)
@@ -48,7 +48,7 @@ CREATE TABLE TECHNICIEN (
 CREATE TABLE AVION (
     idA INT PRIMARY KEY,
     nomA VARCHAR(50) NOT NULL,
-    typeA VARCHAR(50) NOT NULL CHECK (typeA IN ('monomoteur', 'bimoteur', 'multimoteur, propulsion, piston')),
+    typeA VARCHAR(50) NOT NULL CHECK (typeA IN ('monomoteur', 'bimoteur', 'multimoteur', 'propulsion', 'piston')),
     specification VARCHAR(200),
     anneeDeFabrication INT(4) NOT NULL,
     dateLimiteRevision DATE NOT NULL,
@@ -116,4 +116,3 @@ CREATE TABLE CONVENIR (
     constraint fk_convenir_formation FOREIGN KEY (nomF) REFERENCES FORMATION(nomF),
     constraint pk_convenir PRIMARY KEY (idA, nomF)
 );
-
