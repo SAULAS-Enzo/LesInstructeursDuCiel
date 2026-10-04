@@ -1,0 +1,2 @@
+create database Les_Instructeurs_Du_Ciel;
+use Les_Instructeurs_Du_Ciel;
