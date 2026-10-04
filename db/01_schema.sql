@@ -20,7 +20,7 @@ CREATE TABLE PERSONNE (
 );
 
 CREATE TABLE FORMATION(
-    nomF VARCHAR(10) PRIMARY KEY,
+    nomF VARCHAR(10) PRIMARY KEY CHECK(nomF IN ('BIA', 'AMB', 'LAPL', 'PPL', 'CPl', 'ATPL', 'MPL', 'CAEA', 'IR', 'QT', 'MCC')),
     descriptionF VARCHAR(1000),
     formationNecessaire VARCHAR(10),
     constraint fk_formation FOREIGN KEY (formationNecessaire) REFERENCES FORMATION(nomF)
@@ -36,7 +36,7 @@ CREATE TABLE APPRENTI_PILOTE (
 
 CREATE TABLE INSTRUCTEUR (
     idIns INT(9) PRIMARY KEY,
-    nbheuresVol INT,
+    nbheuresVol INT CHECK(nbheuresVol >= 200),
     constraint  fk_instructeur_heritage_personne FOREIGN KEY (idIns) REFERENCES PERSONNE(idPers)
 );
 
@@ -116,3 +116,4 @@ CREATE TABLE CONVENIR (
     constraint fk_convenir_formation FOREIGN KEY (nomF) REFERENCES FORMATION(nomF),
     constraint pk_convenir PRIMARY KEY (idA, nomF)
 );
+
