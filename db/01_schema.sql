@@ -11,11 +11,11 @@ drop table if exists FORMATION;
 drop table if exists PERSONNE;
 
 CREATE TABLE PERSONNE (
-    idPers INT(9) PRIMARY KEY,
+    idPers BIGINT PRIMARY KEY AUTO_INCREMENT,
     nomP VARCHAR(50) NOT NULL,
     prenomP VARCHAR(50) NOT NULL,
-    dateDeNaissanceP CHAR(11),
-    emailP VARCHAR(150) NOT NULL unique,
+    dateDeNaissanceP DATE,
+    emailP VARCHAR(150) NOT NULL UNIQUE,
     motDePasse VARCHAR(200) NOT NULL
 );
 
@@ -27,7 +27,7 @@ CREATE TABLE FORMATION(
 );
 
 CREATE TABLE APPRENTI_PILOTE (
-    idAppP INT(9) PRIMARY KEY ,
+    idAppP BIGINT PRIMARY KEY auto_increment,
     nbHeuresVol INT,
     nomF VARCHAR(10),
     constraint  fk_apprenti_pilote_formaition FOREIGN KEY (nomF) REFERENCES FORMATION(nomF),
@@ -35,18 +35,18 @@ CREATE TABLE APPRENTI_PILOTE (
 );
 
 CREATE TABLE INSTRUCTEUR (
-    idIns INT(9) PRIMARY KEY,
+    idIns BIGINT PRIMARY KEY auto_increment,
     nbheuresVol INT CHECK(nbheuresVol >= 200),
     constraint  fk_instructeur_heritage_personne FOREIGN KEY (idIns) REFERENCES PERSONNE(idPers)
 );
 
 CREATE TABLE TECHNICIEN (
-    idTech INT(9) PRIMARY KEY,
+    idTech BIGINT PRIMARY KEY auto_increment,
     constraint  fk_technicien_heritage_personne FOREIGN KEY (idTech) REFERENCES PERSONNE(idPers)
 );
 
 CREATE TABLE AVION (
-    idA INT PRIMARY KEY,
+    idA BIGINT PRIMARY KEY auto_increment,
     nomA VARCHAR(50) NOT NULL,
     typeA VARCHAR(50) NOT NULL CHECK (typeA IN ('monomoteur', 'bimoteur', 'multimoteur', 'propulsion', 'piston')),
     specification VARCHAR(200),
@@ -60,7 +60,7 @@ CREATE TABLE AVION (
 );
 
 CREATE TABLE VOLS (
-    idV INT(9) PRIMARY KEY,
+    idV BIGINT PRIMARY KEY auto_increment,
     aerodromeDepart CHAR(4) NOT NULL,
     aerodromeArrivee CHAR(4) NOT NULL,
     dureeV INT NOT NULL,
@@ -68,9 +68,9 @@ CREATE TABLE VOLS (
     regleV VARCHAR(50) NOT NULL CHECK (regleV IN ('IFR', 'VFR', 'VFRS')),
     dateV DATE NOT NULL,
     heureV TIME NOT NULL,
-    idAppP INT(9),
-    idIns INT (9),
-    idA INT(9),
+    idAppP BIGINT,
+    idIns BIGINT,
+    idA BIGINT,
 
     constraint fk_vols_apprenti FOREIGN KEY (idAppP) REFERENCES APPRENTI_PILOTE(idAppP),
     constraint fk_vols_instructeur FOREIGN KEY (idIns) REFERENCES INSTRUCTEUR(idIns),
@@ -78,19 +78,19 @@ CREATE TABLE VOLS (
 );
 
 CREATE TABLE CONTROLE_TECHNIQUE (
-    idCT INT(9) PRIMARY KEY,
+    idCT BIGINT PRIMARY KEY auto_increment,
     estValideCT BOOLEAN NOT NULL ,
     dateCT DATE not null,
     heureCT TIME NOT NULL,
-    idTech INT(9),
-    idA INT(9),
+    idTech BIGINT,
+    idA BIGINT,
 
     constraint fk_controle_technique_technicien FOREIGN KEY (idTech) REFERENCES TECHNICIEN(idTech),
     constraint fk_controle_technique_avion FOREIGN KEY (idA) REFERENCES AVION(idA)
 );
 
 CREATE TABLE POSSEDER (
-    idPers INT(9),
+    idPers BIGINT,
     nomF VARCHAR(10),
     dateObtention DATE,
 
@@ -100,7 +100,7 @@ CREATE TABLE POSSEDER (
 );
 
 CREATE TABLE FORMER (
-    idIns INT(9),
+    idIns BIGINT,
     nomF VARCHAR(10),
 
     constraint fk_former_instructeur FOREIGN KEY (idIns) REFERENCES PERSONNE(idPers),
@@ -109,7 +109,7 @@ CREATE TABLE FORMER (
 );
 
 CREATE TABLE CONVENIR (
-    idA INT(9),
+    idA BIGINT(9),
     nomF VARCHAR(10),
 
     constraint fk_convenir_avion FOREIGN KEY (idA) REFERENCES AVION(idA),
