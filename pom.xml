@@ -50,6 +50,11 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webmvc-test</artifactId>
 			<scope>test</scope>
@@ -57,6 +62,19 @@
 	</dependencies>
 
 	<build>
+		<sourceDirectory>backend/src/main/java</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>backend/src/main/resources</directory>
+			</resource>
+		</resources>
+		<testSourceDirectory>backend/src/test/java</testSourceDirectory>
+		<testResources>
+			<testResource>
+				<directory>backend/src/test/resources</directory>
+			</testResource>
+		</testResources>
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -64,5 +82,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
