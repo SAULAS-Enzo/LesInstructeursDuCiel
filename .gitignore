@@ -34,3 +34,5 @@ build/
 
 config/
 *.bkp
+frontend/node_modules/
+frontend/dist/
