@@ -1,4 +1,6 @@
 package fr.enzosaulas.LesInstructeursDuCiel.repository;
 
-public interface FormationRepository {
-}
+import fr.enzosaulas.LesInstructeursDuCiel.model.Formation;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface FormationRepository extends JpaRepository<Formation, String> { }

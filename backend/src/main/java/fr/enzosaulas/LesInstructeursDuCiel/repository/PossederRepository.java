@@ -1,4 +1,7 @@
 package fr.enzosaulas.LesInstructeursDuCiel.repository;
 
-public interface PossederRepository {
-}
+import fr.enzosaulas.LesInstructeursDuCiel.model.Posseder;
+import fr.enzosaulas.LesInstructeursDuCiel.model.PossederId;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PossederRepository extends JpaRepository<Posseder, PossederId> { }
