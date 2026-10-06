@@ -6,7 +6,7 @@ import lombok.*;
 import java.io.Serializable;
 
 /**
- * Représenta la clé primaire de l'entité POSSERDER
+ * Représente la clé primaire de l'entité POSSERDER
  */
 @Embeddable
 @Getter
