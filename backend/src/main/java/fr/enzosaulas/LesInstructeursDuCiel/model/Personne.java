@@ -3,10 +3,15 @@ package fr.enzosaulas.LesInstructeursDuCiel.model;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Un personne est un utilisateur, qu'importe sont rôle.
+ * Un personne est un utilisateur, soit Technicien, soit Instructeur, soit un Apprenti pilote.
  *
  *  <p> Il est défini par : </p>
  *  <ul>
@@ -23,24 +28,22 @@ import lombok.Setter;
  * @since 0.0.1
  */
 @Entity
-@Table( name = "PERSONNE")
-@Getter
-@Setter
-@EqualsAndHashCode
+@Table(name = "PERSONNE")
+@Getter @Setter
+@NoArgsConstructor
 public class Personne {
 
-
-    @Id
+    @Id                                                   // PK
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPers;
 
-    @Column(nullable = false, length=50)
+    @Column(nullable = false, length = 50)
     private String nomP;
 
     @Column(nullable = false, length = 50)
     private String prenomP;
 
-    private String dateDeNaissanceP;
+    private LocalDate dateDeNaissanceP;
 
     @Column(nullable = false, unique = true, length = 150)
     private String emailP;
@@ -48,16 +51,17 @@ public class Personne {
     @Column(nullable = false, length = 200)
     private String motDePasse;
 
-    //@OneToMany(mappedBy = "Posseder")
+    // PERSONNE (0,n) --- POSSEDER
+    @OneToMany(mappedBy = "personne")
+    private List<Posseder> formationsPossedees = new ArrayList<>();
 
-    public Personne(){    }
-
-    public Personne( String nomP, String prenomP, String dateDeNaissanceP, String emailP, String motDePasse) {
+    public Personne(String nomP, String prenomP, LocalDate dateDeNaissanceP,
+                    String emailP, String motDePasse) {
         this.nomP = nomP;
         this.prenomP = prenomP;
         this.dateDeNaissanceP = dateDeNaissanceP;
         this.emailP = emailP;
         this.motDePasse = motDePasse;
     }
-
 }
+
